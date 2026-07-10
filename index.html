@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Punk Gang — a cyberpunk faction built on biohacking, hacking, breakcore, and movement.">
+<meta name="keywords" content="punkgang, hacking, slayy, cyberpunk, biohacking, breakcore, parkour, underground collective">
+<meta name="author" content="Punk Gang">
+<title>Punk Gang</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<style>
+body {
+  background-color: black;
+  color: #00bfff;
+  font-family: monospace;
+  margin: 0;
+  padding: 0 0 50px 0; /* bottom padding to allow scroll past fixed footer */
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+header {
+  text-align: center;
+  border-bottom: 1px solid #00bfff;
+  padding: 15px;
+  background: #050505;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  text-shadow: 0 0 3px #00bfff, 0 0 6px #00f0ff;
+}
+
+nav a {
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+nav a:hover { text-decoration: underline; }
+
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.ascii, .about-pre {
+  text-align: center;
+  white-space: pre;
+  color: #00bfff;
+  margin: 20px auto;
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-shadow: 0 0 2px #00bfff, 0 0 5px #00f0ff;
+}
+
+.memorial {
+  text-align: center;
+  margin: 40px auto;
+}
+
+.memorial img {
+  width: 60%;
+  max-width: 400px;
+  border: 1px solid #00bfff;
+  opacity: 0.9;
+  box-shadow: 0 0 10px #00bfff;
+}
+
+.memorial h3 {
+  color: #00bfff;
+  margin-top: 15px;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #00bfff;
+  padding: 10px;
+  font-size: 0.8em;
+  color: #00bfff;
+  background: #050505;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+a { color: #00bfff; }
+a:hover { text-decoration: underline; }
+
+@media screen and (max-width: 600px) {
+  .memorial img { width: 90%; }
+  .ascii, .about-pre { font-size: 12px; }
+  main { padding: 0 10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PUNK GANG</h1>
+  <nav>
+    <a href="https://punkgang.net/i2p">[ I2P Forum ]</a> 
+    <a href="https://discord.gg/ZmMdgrXU5r">[ Discord ]</a> 
+  </nav>
+</header>
+
+<div class="ascii">
+<pre>
+__________              __       ________                       
+\______   \__ __  ____ |  | __  /  _____/_____    ____    ____  
+ |     ___/  |  \/    \|  |/ / /   \  ___\__  \  /    \  / ___\ 
+ |    |   |  |  /   |  \    <  \    \_\  \/ __ \|   |  \/ /_/  >
+ |____|   |____/|___|  /__|_ \  \______  (____  /___|  /\___  / 
+                     \/     \/         \/     \/     \//_____/  
+</pre>
+</div>
+
+<main>
+  <div class="memorial">
+    <img src="gun.jpg" alt="gun with terminal">
+    <h3>Do you believe you are free?</h3>
+	    <!-- This gun pic was taken from Yung Innanet and is as a shoutout/memorial -->
+  </div>
+
+  <h2>About:</h2>
+  <pre class="about-pre">
+Punk Gang is a collective.
+We grind. We hack. We break shit.
+We talk loud, brag harder, and own what’s ours.
+  </pre>
+
+  <h2>Core:</h2>
+  <pre class="about-pre">
+Biohacking.
+Breakcore.
+Hacking.
+Parkour.
+  </pre>
+</main>
+
+<footer>
+  <p><a href="https://punkgang.net">punkgang.net</a></p>
+</footer>
+
+<script>
+const holoElements = document.querySelectorAll('.ascii, .about-pre, .memorial h3');
+
+function glitchText() {
+  holoElements.forEach(el => {
+    const original = el.dataset.original || el.textContent;
+    if (!el.dataset.original) el.dataset.original = original;
+
+    let distorted = '';
+    for (let i = 0; i < original.length; i++) {
+      const char = original[i];
+      if (char !== ' ' && char !== '\n' && Math.random() < 0.03) {
+        const symbols = '/\\[]{}<>@#%^&*~';
+        distorted += symbols[Math.floor(Math.random() * symbols.length)];
+      } else {
+        distorted += char;
+      }
+    }
+    el.textContent = distorted;
+
+    if (Math.random() < 0.02) {
+      const h = 180 + Math.random() * 180;
+      el.style.color = `hsl(${h}, 100%, 60%)`;
+      el.style.textShadow = `0 0 3px hsl(${h},100%,60%), 0 0 6px hsl(${h},100%,80%)`;
+    }
+  });
+
+  requestAnimationFrame(glitchText);
+}
+
+glitchText();
+</script>
+
+</body>
+</html>
+
