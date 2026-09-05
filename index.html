@@ -118,10 +118,11 @@ a:hover { text-decoration: underline; }
 <header>
   <h1>PUNK GANG</h1>
   <nav>
-    <a href="https://punkgang.net/i2p">[ I2P Forum ]</a> 
+    <a href="https://punkgang.net/weechat">[ Archive ]</a>
     <a href="https://discord.gg/ZmMdgrXU5r">[ Discord ]</a> 
-	<a href="https://smp9.simplex.im/g#UIKToeXMHnMNSqUh2OP4Z-pY-kWJWH1e0PuLGAOscI0">[ Simplex Chat ]</a> 
-  </nav>
+    <a href="https://punkgang.net/i2p">[ I2P Forum ]</a> 
+    <a href="https://smp9.simplex.im/g#UIKToeXMHnMNSqUh2OP4Z-pY-kWJWH1e0PuLGAOscI0">[ Simplex Chat ]</a> 
+</nav>
 </header>
 
 <div class="ascii">
@@ -162,17 +163,31 @@ Parkour
   <p><a href="https://punkgang.net">punkgang.net</a></p>
 </footer>
 
+<audio id="bgMusic" loop preload="auto">
+  <source src="./5G_Original_Speed_Breakcore.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const holoElements = document.querySelectorAll('.ascii, .about-pre, .memorial h3');
+const bgMusic = document.getElementById('bgMusic');
+
+bgMusic.volume = 0.15;
+
+bgMusic.load();
 
 function glitchText() {
   holoElements.forEach(el => {
     const original = el.dataset.original || el.textContent;
-    if (!el.dataset.original) el.dataset.original = original;
+
+    if (!el.dataset.original) {
+      el.dataset.original = original;
+    }
 
     let distorted = '';
+
     for (let i = 0; i < original.length; i++) {
       const char = original[i];
+
       if (char !== ' ' && char !== '\n' && Math.random() < 0.03) {
         const symbols = '/\\[]{}<>@#%^&*~';
         distorted += symbols[Math.floor(Math.random() * symbols.length)];
@@ -180,6 +195,7 @@ function glitchText() {
         distorted += char;
       }
     }
+
     el.textContent = distorted;
 
     if (Math.random() < 0.02) {
@@ -192,9 +208,22 @@ function glitchText() {
   requestAnimationFrame(glitchText);
 }
 
+function startMusic() {
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(error => {
+    console.error('Audio playback failed:', error);
+  });
+
+  document.removeEventListener('click', startMusic);
+  document.removeEventListener('touchstart', startMusic);
+  document.removeEventListener('keydown', startMusic);
+}
+
+document.addEventListener('click', startMusic);
+document.addEventListener('touchstart', startMusic);
+document.addEventListener('keydown', startMusic);
+
 glitchText();
 </script>
-
 </body>
 </html>
-
